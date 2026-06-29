@@ -52,6 +52,19 @@ app.delete('/users/:id', (req, res) => {
   res.status(200).json({ success: true, message: 'User deleted' });
 });
 
+app.post('/users/bulk', (req, res) => {
+  const newUsers = req.body.users;
+  if (!Array.isArray(newUsers) || newUsers.length === 0) {
+    return res.status(400).json({ success: false, message: 'Users array is required' });
+  }
+  const createdUsers = newUsers.map((user, index) => {
+    const newUser = { id: users.length + index + 1, name: user.name, email: user.email };
+    users.push(newUser);
+    return newUser;
+  });
+  res.status(201).json({ success: true, data: createdUsers });
+});
+
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
 });
