@@ -43,5 +43,44 @@ jobs:
 
 ---
 
+# 🚀 Jenkins CI/CD Pipeline
+
+This project uses a Jenkins CI/CD pipeline to automatically build, test, and deploy the application on an AWS EC2 instance using Docker.
+
+## Pipeline Flow
+
+```text
+Developer pushes code to GitHub
+        ↓
+GitHub Webhook triggers Jenkins (EC2)
+        ↓
+Jenkins clones the latest code
+        ↓
+npm install & npm test
+        ↓
+Docker image is built
+        ↓
+Old container is stopped and removed
+        ↓
+New container is started
+        ↓
+Application is live at:
+http://<EC2-Public-IP>:3000
+```
+
+## Technologies
+
+- Jenkins
+- GitHub
+- Docker
+- Node.js
+- AWS EC2
+
+## Deployment
+
+Every push to the GitHub repository automatically triggers Jenkins, which installs dependencies, runs tests, builds a new Docker image, replaces the old container, and deploys the latest version of the application.
+
+---
+
 **DockerHub →** [yagnik0167/nodejs-demo-app](https://hub.docker.com/r/yagnik0167/nodejs-demo-app)  
 **Author →** [@yagnik0167](https://github.com/yagnik0167)
