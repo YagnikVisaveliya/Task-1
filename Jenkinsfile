@@ -3,8 +3,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'Task-2'
-        CONTAINER_NAME = 'Task-2-container'
+        IMAGE_NAME = 'task-2'
+        CONTAINER_NAME = 'task-2-container'
     }
 
     stages {
