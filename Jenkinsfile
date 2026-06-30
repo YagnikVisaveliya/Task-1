@@ -33,7 +33,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                    docker rmi ${IMAGE_NAME}:latest || true"
+                    docker rmi ${IMAGE_NAME}:latest || true
                     docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:v${BUILD_NUMBER} .
                 """
                 echo 'Docker image built successfully.'
