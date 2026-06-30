@@ -9,27 +9,34 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main', url: ''
+                checkout scm
+                echo 'Source code checked out successfully.'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+                echo 'Dependencies installed successfully.'
             }
         }
 
         stage('Run Tests') {
             steps {
                 sh 'npm test'
+                echo 'Tests executed successfully.'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:v${BUILD_NUMBER} ."
+                sh """
+                    docker rmi ${IMAGE_NAME}:latest || true"
+                    docker build -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:v${BUILD_NUMBER} .
+                """
+                echo 'Docker image built successfully.'
             }
         }
 
@@ -39,7 +46,9 @@ pipeline {
                   docker stop ${CONTAINER_NAME} || true
                   docker rm ${CONTAINER_NAME} || true
                   docker run -d --name ${CONTAINER_NAME} -p 3000:3000 ${IMAGE_NAME}:latest
+                  docker image prune -f
                 """
+                echo 'Application deployed on EC2 successfully.'
             }
         }
     }
