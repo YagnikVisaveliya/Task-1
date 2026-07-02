@@ -11,8 +11,6 @@
 
 Every push to `main` triggers this automated flow:
 
----
-
 ## 🐳 Docker Versioning
 
 | Tag       | Description            |
@@ -65,8 +63,10 @@ Old container is stopped and removed
 New container is started
         ↓
 Application is live at:
-http://<EC2-Public-IP>:3000
+http://44.205.1.83:3000
 ```
+<img width="1426" height="738" alt="image" src="https://github.com/user-attachments/assets/82054e8e-d20e-44b9-b101-f4d5ed2cc1b0" />
+
 
 ## Technologies
 
